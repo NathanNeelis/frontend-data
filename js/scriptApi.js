@@ -5,11 +5,37 @@ const endpointNS = 'https://gateway.apiportal.ns.nl/places-api/v2/places'
 getNsData(endpointNS)
     .then(nsData => {
         // console.log('all NS station data', nsData[0].locations);
-        // console.log('all NS data', nsData);
-        let trainStations = nsData[0];
+        console.log('all NS data', nsData);
 
-        // PR Paid parking areas
+        // ------------- Train stations ------------- 
+        let trainStation = nsData[0].locations;
+
+        // Station name
+        let trainStationName = filterData(trainStation, 'name'); // Name of the train station
+
+        // train station code
+        let trainStationCode = filterData(trainStation, 'stationCode'); // Unique code for each train station
+
+        // location train station
+        let trainStationLongitudeArray = filterData(trainStation, 'lng'); // longitude train station
+        let trainStationLatitudeArray = filterData(trainStation, 'lat'); // latitude train station
+        let trainStationLocation = latLongCombine(trainStationLatitudeArray, trainStationLongitudeArray); // Array of lat + long combined
+        let trainStationCountry = filterData(trainStation, 'land'); // all country codes
+        let trainStationNL = filterCountryNL(trainStation); // all stations based in NL
+
+        console.log('all train station data', trainStation);
+        // console.log('all train station names', trainStationName);
+        // console.log('all train station code', trainStationCode);
+        console.log('train station location clean', trainStationLocation);
+        console.log('all train station country:', trainStationCountry);
+        console.log('train station in NL:', trainStationNL);
+
+
+        // ------------- PR PAID PARKING AREAS ------------- 
         let prPaid = nsData[4].locations; // all PR paid location data
+
+        // PR Name
+        let prPaidName = filterData(prPaid, 'name'); // Name of the PR parking area
 
         // PR station code
         let prPaidStationCode = filterData(prPaid, 'stationCode'); // refers to closest train station
@@ -30,15 +56,16 @@ getNsData(endpointNS)
 
 
         // console logs
-        console.log('all PR location data', prPaid);
-        console.log('PR locations clean:', prPaidLocation);
-        console.log('PR Paid stationCode', prPaidStationCode);
-        console.log('PR Paid rates', prPaidRates);
+        // console.log('all PR location data', prPaid);
+        // console.log('PR Paid parking area names', prPaidName);
+        // console.log('PR locations clean:', prPaidLocation);
+        // console.log('PR Paid stationCode', prPaidStationCode);
+        // console.log('PR Paid rates', prPaidRates);
 
-        console.log('PR Paid regular day rate', prPaidRegularDayRate);
-        console.log('PR Paid regular hour rate', prPaidRegularHourRate);
-        console.log('PR Paid train passenger rate', prPaidTrainPassengerRate);
-        console.log('PR Paid total parking spots', prPaidTotalParkingSpots);
+        // console.log('PR Paid regular day rate', prPaidRegularDayRate);
+        // console.log('PR Paid regular hour rate', prPaidRegularHourRate);
+        // console.log('PR Paid train passenger rate', prPaidTrainPassengerRate);
+        // console.log('PR Paid total parking spots', prPaidTotalParkingSpots);
 
     })
 
@@ -73,11 +100,20 @@ function filterData(dataArray, column) {
     return dataArray.map(result => result[column]);
 }
 
+// remove empty values
 function removeEmptySlots(arr) {
     let cleanData = arr.filter(function (cleanData) {
-        return cleanData != ""; // returns an Array without empty values.
+        return cleanData != ''; // returns an Array without empty values.
     })
     return cleanData;
+}
+
+// returns all values that have the country equals to NL
+function filterCountryNL(stations) {
+    let countryNL = stations.filter(function (stationArray) {
+        return stationArray.land === 'NL';
+    })
+    return countryNL;
 }
 
 // returns an array of latitude + longitude locations
