@@ -1,13 +1,16 @@
-const endpointNS = 'https://gateway.apiportal.ns.nl/places-api/v2/places'
+const endpointNS = 'https://gateway.apiportal.ns.nl/places-api/v2/places';
+const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+// const endpointAdam = 'https://open.data.amsterdam.nl/ivv/parkeren/p_r_routes.json';
+const endpointNPR = 'https://npropendata.rdw.nl/parkingdata/v2/';
 
 
 
 getNsData(endpointNS)
     .then(nsData => {
         // console.log('all NS station data', nsData[0].locations);
-        console.log('all NS data', nsData);
+        // console.log('all NS data', nsData);
 
-        // ------------- Train stations ------------- 
+        // ------------- Train stations ------------- ------------- ------------- ------------- ------------- ------------- ------------- 
         let trainStation = nsData[0].locations;
 
         // Station name
@@ -23,15 +26,16 @@ getNsData(endpointNS)
         let trainStationCountry = filterData(trainStation, 'land'); // all country codes
         let trainStationNL = filterCountryNL(trainStation); // all stations based in NL
 
-        console.log('all train station data', trainStation);
+        // console logs
+        // console.log('all train station data', trainStation);
         // console.log('all train station names', trainStationName);
         // console.log('all train station code', trainStationCode);
-        console.log('train station location clean', trainStationLocation);
-        console.log('all train station country:', trainStationCountry);
-        console.log('train station in NL:', trainStationNL);
+        // console.log('train station location clean', trainStationLocation);
+        // console.log('all train station country:', trainStationCountry);
+        // console.log('train station in NL:', trainStationNL);
 
 
-        // ------------- PR PAID PARKING AREAS ------------- 
+        // ------------- PR PAID PARKING AREAS ------------- ------------- ------------- ------------- ------------- ------------- ------------- 
         let prPaid = nsData[4].locations; // all PR paid location data
 
         // PR Name
@@ -44,6 +48,8 @@ getNsData(endpointNS)
         let prPaidLongitudeArray = filterData(prPaid, 'lng'); // longitude PR parking area
         let prPaidLatitudeArray = filterData(prPaid, 'lat'); // latitude PR parking area
         let prPaidLocation = latLongCombine(prPaidLatitudeArray, prPaidLongitudeArray); // Array of lat + long combined
+        let prPaidCity = filterData(prPaid, 'city'); // All city names
+        let prPaidCityClean = removeEmptySlots(prPaidCity); // all city names with empty slots removed
 
         // PR paid rates
         let prPaidRates = filterData(prPaid, 'extra'); // ALL rates: Day rate regular, Hour rate regular, Day rate train passenger. + Total amount parking spaces
@@ -61,13 +67,60 @@ getNsData(endpointNS)
         // console.log('PR locations clean:', prPaidLocation);
         // console.log('PR Paid stationCode', prPaidStationCode);
         // console.log('PR Paid rates', prPaidRates);
-
+        // console.log('PR Paid city names', prPaidCityClean);
         // console.log('PR Paid regular day rate', prPaidRegularDayRate);
         // console.log('PR Paid regular hour rate', prPaidRegularHourRate);
         // console.log('PR Paid train passenger rate', prPaidTrainPassengerRate);
         // console.log('PR Paid total parking spots', prPaidTotalParkingSpots);
 
+        // ------------- PR FREE PARKING AREAS ------------- ------------- ------------- ------------- ------------- ------------- ------------- 
+        let prFree = nsData[13].locations; // all PR paid location data
+
+        // PR Name
+        let prFreeName = filterData(prFree, 'name'); // Name of the PR parking area
+
+
+        // PR station code
+        let prFreeStationCode = filterData(prFree, 'stationCode'); // refers to closest train station
+
+        // PR paid location data
+        let prFreeLongitudeArray = filterData(prFree, 'lng'); // longitude PR parking area
+        let prFreeLatitudeArray = filterData(prFree, 'lat'); // latitude PR parking area
+        let prFreeLocation = latLongCombine(prFreeLatitudeArray, prFreeLongitudeArray); // Array of lat + long combined
+        let prFreeCity = filterData(prFree, 'city'); // All city names
+        let prFreeCityClean = removeEmptySlots(prFreeCity); // all city names with empty slots removed
+
+        // PR parking spaces
+        let prFreeExtra = filterData(prFree, 'extra');
+        let prFreeTotalParkingSpots = filterData(prFreeExtra, 'Aantal parkeerplaatsen'); // Total amount of parking spots in the PR parking area
+
+
+        // console logs
+        // console.log('all PR Free location data', prFree);
+        // console.log('PR Free parking area names', prFreeName);
+        // console.log('PR Free locations clean:', prFreeLocation);
+        // console.log('PR Free stationCode', prFreeStationCode);
+        // console.log('PR Free total parking spots', prFreeTotalParkingSpots);
+        // console.log('all PR with city names', prFreeCityClean);
+
+
     })
+
+
+// ------------- NPR dataset------------- ------------- ------------- ------------- ------------- ------------- ------------- 
+
+const nprData = data[0].ParkingFacilities;
+let nprDataSetClean = removeNoName(nprData);
+console.log(nprDataSetClean);
+
+let prParking = filterPrParking(nprDataSetClean);
+console.log('all PR parking areas', prParking);
+
+
+// getNPRData(proxyUrl + endpointNPR)
+//     .then(nprData => {
+//         console.log('all NPR data', nprData);
+//     })
 
 
 async function getNsData(url) {
@@ -86,7 +139,11 @@ async function getNsData(url) {
 // MDN about fetch, got the resource from Robert.
 //Resources: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 
-
+async function getNPRData(url) {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+}
 
 
 
@@ -103,7 +160,7 @@ function filterData(dataArray, column) {
 // remove empty values
 function removeEmptySlots(arr) {
     let cleanData = arr.filter(function (cleanData) {
-        return cleanData != ''; // returns an Array without empty values.
+        return cleanData != undefined; // returns an Array without empty values.
     })
     return cleanData;
 }
@@ -115,6 +172,20 @@ function filterCountryNL(stations) {
     })
     return countryNL;
 }
+
+// returns all data that includes PR parking
+function filterPrParking(allData) {
+    let substring = 'P+R';
+    let prParkingArray = [];
+    for (let i = 0; i < allData.length; i++) {
+        if (allData[i].name.indexOf(substring) !== -1) {
+            prParkingArray.push(allData[i])
+        }
+    }
+    return prParkingArray;
+}
+
+// Resource: https://stackoverflow.com/questions/1789945/how-to-check-whether-a-string-contains-a-substring-in-javascript
 
 // returns an array of latitude + longitude locations
 function latLongCombine(latitudeArray, longitudeArray) {
@@ -128,8 +199,12 @@ function latLongCombine(latitudeArray, longitudeArray) {
 //Resource: https://stackoverflow.com/questions/47235728/how-to-merge-two-arrays-with-latitudes-and-longitudes-to-display-markers
 
 
-
-
+// removes all items in array that do not have the key "name" in the object.
+function removeNoName(allData) {
+    let newArray = allData.filter(obj => Object.keys(obj).includes("name"));
+    return newArray
+}
+// Resource: https://stackoverflow.com/questions/51367551/how-to-remove-object-from-array-if-property-in-object-do-not-exist
 
 
 
@@ -144,38 +219,38 @@ function latLongCombine(latitudeArray, longitudeArray) {
 
 // CODE FROM LIVECODING BELOW
 
-// Returns all unique values in an array
-function listUnique(dataArray) {
-    // code to find the unique values
-    let uniqueArray = [];
-    dataArray.map(item => {
-        if (uniqueArray.indexOf == -1) // If items does not excist yet in the array, then add it to the array.
-        {
-            uniqueArray.push(item);
-        }
-    })
-    return uniqueArray;
-}
-// RESOURCE: code by Laurens - livecoding API
+// // Returns all unique values in an array
+// function listUnique(dataArray) {
+//     // code to find the unique values
+//     let uniqueArray = [];
+//     dataArray.map(item => {
+//         if (uniqueArray.indexOf == -1) // If items does not excist yet in the array, then add it to the array.
+//         {
+//             uniqueArray.push(item);
+//         }
+//     })
+//     return uniqueArray;
+// }
+// // RESOURCE: code by Laurens - livecoding API
 
 
-// compares two arrays and returns the values  that are present in array1 but not in array 2.
-function compareArray(array1, array2) {
-    // code below...
-    return valuesOnlyPresentInArray1
-}
+// // compares two arrays and returns the values  that are present in array1 but not in array 2.
+// function compareArray(array1, array2) {
+//     // code below...
+//     return valuesOnlyPresentInArray1
+// }
 
-// Returns the number of times a value is present in an Array
-function countValuesInArray(valueArray, specificValue) {
-    // code below...
-    let count = 0;
-    valueArray.forEach(item => {
-        if (item == specificValue) {
-            count += 1
-        }
-    })
-    return count
+// // Returns the number of times a value is present in an Array
+// function countValuesInArray(valueArray, specificValue) {
+//     // code below...
+//     let count = 0;
+//     valueArray.forEach(item => {
+//         if (item == specificValue) {
+//             count += 1
+//         }
+//     })
+//     return count
 
-    //to do: 
-    // search in all items and count if there are more.
-}
+//     //to do: 
+//     // search in all items and count if there are more.
+// }
