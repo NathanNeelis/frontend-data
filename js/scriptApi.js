@@ -1,26 +1,47 @@
-const endpoint = 'https://opendata.rdw.nl/resource/t5pc-eb34.json'; // welke dataset?
 const endpointNS = 'https://gateway.apiportal.ns.nl/places-api/v2/places'
-// const endpointCBS = 'https://opendata.cbs.nl/ODataApi/odata/70072ned/TypedDataSet'
-const selectedColumn = 'areaid'; // column of choice
 
-getData(endpoint)
-    .then(rdwData => {
-        console.log('all RDW data:', rdwData);
-        console.log('first element:', rdwData[0]);
-        const areaIdArray = filterData(rdwData, selectedColumn);
-        console.log(areaIdArray);
-    })
+
 
 getNsData(endpointNS)
     .then(nsData => {
-        console.log('all NS station data', nsData[0].locations);
-        console.log('all NS data', nsData);
+        // console.log('all NS station data', nsData[0].locations);
+        // console.log('all NS data', nsData);
+        let trainStations = nsData[0];
+
+        // PR Paid parking areas
+        let prPaid = nsData[4].locations; // all PR paid location data
+
+        // PR station code
+        let prPaidStationCode = filterData(prPaid, 'stationCode'); // refers to closest train station
+
+        // PR paid location data
+        let prPaidLongitudeArray = filterData(prPaid, 'lng'); // longitude PR parking area
+        let prPaidLatitudeArray = filterData(prPaid, 'lat'); // latitude PR parking area
+        let prPaidLocation = latLongCombine(prPaidLatitudeArray, prPaidLongitudeArray); // Array of lat + long combined
+
+        // PR paid rates
+        let prPaidRates = filterData(prPaid, 'extra'); // ALL rates: Day rate regular, Hour rate regular, Day rate train passenger. + Total amount parking spaces
+        let prPaidRegularDayRate = filterData(prPaidRates, 'Dagtarief regulier'); // Day rate regular parking
+        let prPaidRegularHourRate = filterData(prPaidRates, 'Uurtarief regulier'); // Hourly rate regular parking
+        let prPaidTrainPassengerRate = filterData(prPaidRates, 'Dagtarief treinreiziger'); // Day rate for a train passenger
+
+        // PR parking spaces
+        let prPaidTotalParkingSpots = filterData(prPaidRates, 'Aantal parkeerplaatsen'); // Total amount of parking spots in the PR parking area
+
+
+        // console logs
+        console.log('all PR location data', prPaid);
+        console.log('PR locations clean:', prPaidLocation);
+        console.log('PR Paid stationCode', prPaidStationCode);
+        console.log('PR Paid rates', prPaidRates);
+
+        console.log('PR Paid regular day rate', prPaidRegularDayRate);
+        console.log('PR Paid regular hour rate', prPaidRegularHourRate);
+        console.log('PR Paid train passenger rate', prPaidTrainPassengerRate);
+        console.log('PR Paid total parking spots', prPaidTotalParkingSpots);
+
     })
 
-// getData(endpointCBS)
-//     .then(cbsData => {
-//         console.log('all CBS data:', cbsData);
-//     })
 
 async function getNsData(url) {
     const response = await fetch(url, {
@@ -38,16 +59,54 @@ async function getNsData(url) {
 // MDN about fetch, got the resource from Robert.
 //Resources: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 
-async function getData(url) {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-}
+
+
+
+
+
+
+
+// SEPERATE FUNCTIONS TO CLEAN DATA ARRAYS
 
 // returns an array of all data in a specific column
 function filterData(dataArray, column) {
     return dataArray.map(result => result[column]);
 }
+
+function removeEmptySlots(arr) {
+    let cleanData = arr.filter(function (cleanData) {
+        return cleanData != ""; // returns an Array without empty values.
+    })
+    return cleanData;
+}
+
+// returns an array of latitude + longitude locations
+function latLongCombine(latitudeArray, longitudeArray) {
+    let locationArray = latitudeArray.map(function (latitude, index) {
+        return [latitude, longitudeArray[index]];
+    });
+    return locationArray;
+
+}
+// Combining lat + long array
+//Resource: https://stackoverflow.com/questions/47235728/how-to-merge-two-arrays-with-latitudes-and-longitudes-to-display-markers
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// CODE FROM LIVECODING BELOW
 
 // Returns all unique values in an array
 function listUnique(dataArray) {
