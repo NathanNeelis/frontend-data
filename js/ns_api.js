@@ -1,7 +1,5 @@
 const endpointNS = 'https://gateway.apiportal.ns.nl/places-api/v2/places';
-const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 // const endpointAdam = 'https://open.data.amsterdam.nl/ivv/parkeren/p_r_routes.json';
-const endpointNPR = 'https://npropendata.rdw.nl/parkingdata/v2/';
 
 
 
@@ -107,22 +105,6 @@ getNsData(endpointNS)
     })
 
 
-// ------------- NPR dataset------------- ------------- ------------- ------------- ------------- ------------- ------------- 
-
-const nprData = data[0].ParkingFacilities;
-let nprDataSetClean = removeNoName(nprData);
-console.log(nprDataSetClean);
-
-let prParking = filterPrParking(nprDataSetClean);
-console.log('all PR parking areas', prParking);
-
-
-// getNPRData(proxyUrl + endpointNPR)
-//     .then(nprData => {
-//         console.log('all NPR data', nprData);
-//     })
-
-
 async function getNsData(url) {
     const response = await fetch(url, {
         method: 'GET',
@@ -139,11 +121,6 @@ async function getNsData(url) {
 // MDN about fetch, got the resource from Robert.
 //Resources: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 
-async function getNPRData(url) {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-}
 
 
 
