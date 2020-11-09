@@ -5,10 +5,26 @@ getData(endpointNPR)
         console.log('all Park & ride data:', prData);
 
         let prCapacity = getCapacity(prData);
-        console.log('All Capacities', prCapacity)
+        // console.log('All Capacities', prCapacity)
 
+        // FIX THIS ONE -- to realy citiname
         let prCityArray = filterCity(prData);
-        console.log('all cities', prCityArray);
+        // console.log('all cities', prCityArray);
+
+        let objectArray = wrap(prCityArray, prCapacity);
+        console.log('new object', objectArray);
+
+        // let tarifArray = getRate(prData); // RATES TO DO LATER
+
+        // ARRAY WITH DATA OBJECT FOR RANDSTAND CITIES
+        // randstad cities; Delft, Dordrecht, Leiden, Zaanstad, Haarlem, Utrecht, Den Haag, Rotterdam, Amsterdam
+        let randstadCities = selectRandstad(objectArray);
+        console.log('testing randstad cities', randstadCities);
+
+        // clean the randstad cities.
+        // combine the data if city name is the same and add capacity.
+        let randstadClean = cleanRandStadData(randstadCities);
+
 
     })
 
@@ -18,12 +34,76 @@ async function getData(url) {
     return data;
 }
 
+function cleanRandStadData(rsData) {
+
+    let delftClean = combineData(rsData, 'Delft');
+    let dordrechtClean = combineData(delftClean, 'Dordrecht');
+    let leidenClean = combineData(dordrechtClean, 'Leiden');
+    let zaandamClean = combineData(leidenClean, 'Zaandam');
+    let haarlemClean = combineData(zaandamClean, 'Haarlem');
+    let utrechtClean = combineData(haarlemClean, 'Utrecht');
+    let denHaagClean = combineData(utrechtClean, 'Den Haag');
+    let rotterdamClean = combineData(denHaagClean, 'Rotterdam');
+    let amsterdamClean = combineData(rotterdamClean, 'Amsterdam');
+
+    console.log('fixed cities in randstad', amsterdamClean);
+}
+
+
+function combineData(rsData, city) {
+    let cleanData = rsData.map((data) => {
+        if (data.cityFirst === city || data.citySecond === city) {
+            console.log('i am looking for', city)
+            return {
+                city: city,
+                capacity: data.capacity
+            }
+        } else if (data.city != undefined) {
+            return {
+                city: data.city,
+                capacity: data.capacity
+            }
+        } else return {
+            cityFirst: data.cityFirst,
+            citySecond: data.citySecond,
+            capacity: data.capacity
+        }
+    })
+    // console.log('Amsterdam combined', cleanData);
+
+    return cleanData;
+}
+
+
+// returns an array with all data for ranstad cities
+function selectRandstad(objectArray) {
+
+    let delftCities = filterRandstad(objectArray, 'Delft');
+    let dordrechtCities = filterRandstad(objectArray, 'Dordrecht');
+    let leidenCities = filterRandstad(objectArray, 'Leiden');
+    let zaandamCities = filterRandstad(objectArray, 'Zaandam');
+    let haarlemCities = filterRandstad(objectArray, 'Haarlem');
+    let utrechtCities = filterRandstad(objectArray, 'Utrecht');
+    let denHaagCities = filterRandstad(objectArray, 'Den Haag');
+    let rotterdamCities = filterRandstad(objectArray, 'Rotterdam');
+    let amsterdamCities = filterRandstad(objectArray, 'Amsterdam');
+
+    let randstadCities = [...delftCities, ...dordrechtCities, ...leidenCities, ...zaandamCities, ...haarlemCities, ...utrechtCities, ...denHaagCities, ...rotterdamCities, ...amsterdamCities]
+    // let randstadCities = [].concat(delftCities, dordrechtCities)
+    // console.log('clean randstad city data', randstadCities)
+
+    return randstadCities;
+
+}
+
 // returns an array of all the capicity for each parking area
 function getCapacity(prData) {
     let prSpecifications = filterData(prData, 'specifications')
     // console.log('all specifications', prSpecifications);
+
     let prSpecificationClean = removeOuterArray(prSpecifications);
     // console.log('specifications', prSpecificationClean)
+
     let prSPecificationFixed = fixEmptyValues(prSpecificationClean);
     // console.log('testing', prSPecificationFixed);
     let prCapicity = filterData(prSPecificationFixed, 'capacity');
@@ -35,10 +115,52 @@ function getCapacity(prData) {
 
 // Returns an array of all cities
 function filterCity(prData) {
+    // FIRST CITY NAME
+    let accessPointDataArray = filterData(prData, 'accessPoints');
+    let accessPointDataArrayClean = removeOuterArray(accessPointDataArray);
+    let accessPointDataArrayFixed = fixEmptyValues(accessPointDataArrayClean);
+    // console.log('fixed data array', accessPointDataArrayFixed);
+
+    let accesPointAdress = filterData(accessPointDataArrayFixed, 'accessPointAddress')
+    // console.log('adresses', accesPointAdress);
+
+    let prCities = filterData(accesPointAdress, 'city')
+    // console.log(prCities);
+
+    // SECOND CITY NAME
     let operatorDataArray = filterData(prData, 'operator');
+    // console.log('operator', operatorDataArray);
     let operatorCityName = filterData(operatorDataArray, 'name')
-    return operatorCityName
+    // console.log('operator deep', operatorCityName);
+
+    // BOTH NAMES IN 1 OBJECT
+    let cityNameObject = wrapCity(prCities, operatorCityName)
+    // console.log(cityNameObject);
+
+    return cityNameObject
 }
+
+// // RATES FOR PR AREAS
+// function getRate(prData) {
+//     let tariffsData = filterData(prData, 'tariffs')
+//     console.log('tarifs Data', tariffsData)
+
+//     let tariffsDataClean = wrapRates(tariffsData);
+//     console.log('found rate', tariffsDataClean);
+
+//     console.log('finding rate', tariffsData[0][0].intervalRates[0].charge)
+
+
+// }
+
+// FILTER DATA ON RANDSTAD CITIES
+function filterRandstad(prData, city) {
+    let randstadData = prData.filter(array => {
+        return array.cityFirst === city || array.citySecond === city;
+    })
+    return randstadData;
+}
+
 
 // returns an array of all data in a specific column
 function filterData(dataArray, column) {
@@ -92,3 +214,30 @@ function removeNoName(allData) {
     return newArray
 }
 // Resource: https://stackoverflow.com/questions/51367551/how-to-remove-object-from-array-if-property-in-object-do-not-exist
+
+
+function wrap(city, capacity) {
+    let items = city.map((city, index) => {
+        return {
+            cityFirst: city.cityFirst,
+            citySecond: city.citySecond,
+            capacity: capacity[index]
+        }
+    });
+
+    return items
+}
+
+function wrapCity(cityNameOne, cityNameTwo) {
+    let cities = cityNameOne.map((city, index) => {
+        return {
+            cityFirst: city,
+            citySecond: cityNameTwo[index]
+        }
+    });
+
+    return cities
+}
+
+
+// RESOURCE https://stackoverflow.com/questions/40539591/how-to-create-an-array-of-objects-from-multiple-arrays

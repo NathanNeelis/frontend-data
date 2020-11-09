@@ -1,6 +1,27 @@
 {
+  "name": "Data visualisation Tech Track",
+  "version": "1.0.0",
+  "description": "Visualising data for the car in the city",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "say-hello": "echo 'Hello world'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NathanNeelis/frontend-data"
+  },
+  "author": "Nathan Neelis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NathanNeelis/frontend-data/issues"
+  },
+  "homepage": "https://github.com/NathanNeelis/frontend-data#readme",
   "dependencies": {
     "file-system": "^2.2.2",
     "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^10.0.0"
   }
 }
