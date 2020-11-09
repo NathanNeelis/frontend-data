@@ -12,7 +12,7 @@ getData(endpointNPR)
         // console.log('all cities', prCityArray);
 
         let objectArray = wrap(prCityArray, prCapacity);
-        console.log('new object', objectArray);
+        // console.log('new object', objectArray);
 
         // let tarifArray = getRate(prData); // RATES TO DO LATER
 
@@ -24,6 +24,11 @@ getData(endpointNPR)
         // clean the randstad cities.
         // combine the data if city name is the same and add capacity.
         let randstadClean = cleanRandStadData(randstadCities);
+        console.log('randstad cities', randstadClean)
+
+        let combine = combineDoubleCities(randstadClean);
+        console.log(typeof combine)
+        console.log('randstad fixed', combine);
 
 
     })
@@ -34,8 +39,57 @@ async function getData(url) {
     return data;
 }
 
-function cleanRandStadData(rsData) {
+function combineDoubleCities(rsData) {
 
+    // let combinedData = rsData.map((data) => {
+    //     if (data.city === data.city) {
+    //         return {
+    //             city: data.city,
+    //             capacity: data.capacity + data.capacity
+    //         }
+
+    //     }
+    // })
+    // console.log('test test test', combinedData)
+
+
+    // let combinedData = obj.reduce((a, v) => {
+    //     if (a[v.city]) {
+    //         a[v.city].capacity = a[v.city].capacity + v.capacity
+    //         // console.log('andere data', a[v.city].capacity = a[v.city].capacity + v.capacity)
+    //     } else {
+    //         a[v.city] = v
+    //         // console.log('dit is v', v)
+    //     }
+    //     // console.log('dit is a', a)
+    //     return a
+
+    // }, [])
+    // console.log('test combining', combinedData);
+    // return combinedData
+
+    let arr = rsData,
+        result = [];
+
+    arr.forEach(function (a) {
+        if (!this[a.city]) {
+            this[a.city] = {
+                city: a.city,
+                capacity: 0
+            };
+            result.push(this[a.city]);
+        }
+        this[a.city].capacity += a.capacity;
+    }, Object.create(null));
+
+    return result;
+
+    // WINNING RESOURCE: https://stackoverflow.com/questions/38294781/how-to-merge-duplicates-in-an-array-of-objects-and-sum-a-specific-property
+    // RESOURCE: https://stackoverflow.com/questions/60036060/combine-object-array-if-same-key-value-in-javascript
+}
+
+// returns array of objects with the right citynames
+function cleanRandStadData(rsData) {
     let delftClean = combineData(rsData, 'Delft');
     let dordrechtClean = combineData(delftClean, 'Dordrecht');
     let leidenClean = combineData(dordrechtClean, 'Leiden');
@@ -46,33 +100,14 @@ function cleanRandStadData(rsData) {
     let rotterdamClean = combineData(denHaagClean, 'Rotterdam');
     let amsterdamClean = combineData(rotterdamClean, 'Amsterdam');
 
-    console.log('fixed cities in randstad', amsterdamClean);
-}
-
-
-function combineData(rsData, city) {
-    let cleanData = rsData.map((data) => {
-        if (data.cityFirst === city || data.citySecond === city) {
-            console.log('i am looking for', city)
-            return {
-                city: city,
-                capacity: data.capacity
-            }
-        } else if (data.city != undefined) {
-            return {
-                city: data.city,
-                capacity: data.capacity
-            }
-        } else return {
-            cityFirst: data.cityFirst,
-            citySecond: data.citySecond,
-            capacity: data.capacity
-        }
-    })
-    // console.log('Amsterdam combined', cleanData);
+    let cleanData = [...amsterdamClean];
 
     return cleanData;
+    // console.log('fixed cities in randstad', amsterdamClean);
 }
+
+
+
 
 
 // returns an array with all data for ranstad cities
@@ -188,7 +223,7 @@ function fixEmptyValues(prData) {
 
     // Create an object with all keys set to the default value ('UNKNOWN')
     let def = keys.reduce((result, key) => {
-        result[key] = 'UNKNOWN'
+        result[key] = 0;
         return result;
     }, {});
     // console.log('All keys with a UNKOWN value', def);
@@ -238,6 +273,33 @@ function wrapCity(cityNameOne, cityNameTwo) {
 
     return cities
 }
-
-
 // RESOURCE https://stackoverflow.com/questions/40539591/how-to-create-an-array-of-objects-from-multiple-arrays
+
+
+// This function checks if the city in the data is the same as the input city, 
+// if so then it changes the object to city: city.
+// instead of cityFirst and citySecond.
+// It also checks if there already is a key "city" that contains data
+function combineData(rsData, city) {
+    let cleanData = rsData.map((data) => {
+        if (data.cityFirst === city || data.citySecond === city) {
+            // console.log('i am looking for', city)
+            return {
+                city: city, // REPLACES cityFirst and citySecond FOR CITY: CITY
+                capacity: data.capacity // ADDS THE CAPACITY
+            }
+        } else if (data.city != undefined) {
+            return {
+                city: data.city, // CHECKS IF DATA.CITY ALREADY EXIST, IF SO RETURNS THE SAME DATA.
+                capacity: data.capacity // ADDS CAPACITY
+            }
+        } else return { // IF THE ABOVE STATEMENT IS NOT SO, THEN RETURN THE SAME OBJECT AS BEFORE.
+            cityFirst: data.cityFirst,
+            citySecond: data.citySecond,
+            capacity: data.capacity
+        }
+    })
+    return cleanData;
+
+    // DIT KAN WAARSCHIJNLIJK NOG WEL MOOIER MET EEN ARRAY VAN RANDSTAD CITIES DIE HIER LOOPT. MISSCHIEN VOOR LATER.
+}
