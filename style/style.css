@@ -37,14 +37,14 @@ rect {
 
 .axis-label {
   font-size: 2.5em;
-  fill: white;
+  fill: #6f7173;
   ;
 }
 
 .container {
-  margin-top: 1em;
-  margin-left: 2.2em;
-  margin-bottom: 3em;
+  margin: 1em auto 3em auto;
+  width: 960px;
+  padding: 0 2em;
 }
 
 h1 {
