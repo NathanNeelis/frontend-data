@@ -4,19 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style/style.css">
+    <script src="https://unpkg.com/d3@6.2.0/dist/d3.min.js"></script>
+    <title>Datavisualisatie P+R parking areas
+    </title>
+
 </head>
 
 <body>
-    <h1>hello world</h1>
+    <div id="mainContainer">
+        <div class="container">
+            <h1>How many P+R parking places are there in the Randstad?</h1>
+            <p>Add all parking places for each Randstad city
+                <input type="checkbox" class="filter" name="filter">
+                <p>
+        </div>
 
+        <svg width="960" height="700"></svg>
+    </div>
     <!-- scripts -->
+    <script src="bundle.js"></script>
     <!-- <script src="data/data_survey.js"></script> -->
     <!-- <script src="js/surveyData_script.js"></script> -->
     <!-- <script src="data/npr_data.js"></script> -->
-    <!-- <script src="js/ns_api.js"></script> -->
-    <script src="js/npr_api.js"></script>
-    <!-- <script src="bundle.js"></script> -->
+    <!-- <script src="js/npr_api.js"></script> -->
 </body>
 
 </html>

@@ -1,0 +1,58 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0px;
+  overflow: hidden;
+  background-color: #89b9e0;
+}
+
+#mainContainer {
+  width: 960px;
+  margin: 0 auto;
+}
+
+
+rect {
+  fill: darkGreen;
+}
+
+.axis-y .tick text {
+  font-size: 1.2em;
+  fill: white;
+}
+
+.axis-x .tick text {
+  font-size: 1em;
+  fill: white;
+}
+
+.tick line {
+  stroke: #C0C0BB;
+}
+
+.axis-label {
+  font-size: 2.5em;
+  fill: white;
+  ;
+}
+
+.container {
+  margin-top: 1em;
+  margin-left: 2.2em;
+  margin-bottom: 3em;
+}
+
+h1 {
+  font-size: 2em;
+  color: white;
+  font-family: sans-serif;
+}
+
+p {
+  margin-top: .5em;
+}
