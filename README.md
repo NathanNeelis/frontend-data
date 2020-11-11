@@ -56,7 +56,9 @@ With my transformed data I could start making my visual with the [D3 Library](ht
 
 #### Cloning the repo
 1. Create your git repo  
-    ```mkdir foldername```   
+    ```bash
+    mkdir foldername
+    ```   
     ```cd "/foldername"```    
     ```git init```  
 
