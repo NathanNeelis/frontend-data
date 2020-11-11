@@ -9,6 +9,7 @@ body {
   margin: 0px;
   overflow: hidden;
   background-color: #dde2eb;
+  overflow: scroll;
 }
 
 #mainContainer {

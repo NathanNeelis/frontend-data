@@ -73,7 +73,6 @@ function changeOutput() {
   const filterOn = this ? this.checked : false;
   console.log('checkbox', this.checked)
 
-  // const dataSelection = filterOn? prDataSet.filter(parking => parking.capacity) : data
   const dataSelection = filterOn ? combineDoubleCities(prDataSet) : prDataSet
   console.log('new data', dataSelection)
 
