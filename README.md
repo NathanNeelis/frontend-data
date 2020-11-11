@@ -1,5 +1,5 @@
-### functional-programming
-functional-programming 20/21  
+### functional-programming & Frontend Data
+functional-programming - Frontend Data 20/21  
 Student name: Nathan Neelis  
 :earth_americas: live website: https://nathanneelis.github.io/frontend-data/index.html
 
@@ -10,9 +10,8 @@ For the Volkskrant we are taking a look at the RDW datasets to find interesting 
 
 ### Research questions
 **Main research question: Which city uses the Park and Ride parking areas the best to keep cars from their city center?**   
-
 **Sub question 1:** Are all Randstad cities providing P+R parking areas?  
-**Sub question 2:** What about cities outside of the Randstad?
+**Sub question 2:** What about cities outside of the Randstad?  
 **Sub question 3:** Is there a difference in rate for the Randstad cites and outside?  
 **Sub question 4:** How long does it take to reach your destination from the P+R?
   
