@@ -1,7 +1,9 @@
 ### functional-programming
 functional-programming 20/21  
 Student name: Nathan Neelis  
-live website: https://nathanneelis.github.io/functional-programming/
+:earth_americas: live website: https://nathanneelis.github.io/frontend-data/index.html
+
+![eindresultaat2](https://user-images.githubusercontent.com/55492381/98851157-25820f00-2456-11eb-9c9c-a304a0bf43eb.gif)
 
 ### Assignment
 For the Volkskrant we are taking a look at the RDW datasets to find interesting insights for a potential article about the car in the city. The subject is "the car in the city" and the datasets contains all kind of information about parking. But we're free to explore other data as well that has to do with the car in the city.  
@@ -17,13 +19,13 @@ For the Volkskrant we are taking a look at the RDW datasets to find interesting 
 Please read my [wiki](https://github.com/NathanNeelis/frontend-data/wiki/concept) for more information about my assumptions and datasets.
 
 ### Concept
-A bar chart that shows the amount of P+R parking areas for the 9 Randstad cities. 
+A radar chart that shows the amount of P+R parking areas for the 9 Randstad cities. 
 Going in depth you would be able to see how many P+R parking spaces each city in total has available.  
 The second part of the concept is to split these results and filter on paid, free or both (total).  
 The third part of the concept would be to map the differences in rate for the paid P+R parking areas.
 To finish it would be nice to show how long it would take from a P+R to reach a destination, for example the train station.  
 
-![eindresultaat](https://user-images.githubusercontent.com/55492381/98845200-a7216f00-244d-11eb-9b9c-cc085fe00768.gif)
+![PR_RadarChart-digitaal](https://user-images.githubusercontent.com/55492381/98220139-2b578c00-1f4e-11eb-8a87-c259ca875acc.jpg)  
 
 
 ### Datasets
