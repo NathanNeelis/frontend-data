@@ -57,10 +57,10 @@ With my transformed data I could start making my visual with the [D3 Library](ht
 #### Cloning the repo
 1. Create your git repo  
     ```bash
-    mkdir foldername
-    ```   
-    ```cd "/foldername"```    
-    ```git init```  
+    mkdir foldername  
+    cd "/foldername"  
+    git init  
+    ```  
 
 2. Clone this repo  
     ```git clone https://github.com/NathanNeelis/frontend-data.git```   
