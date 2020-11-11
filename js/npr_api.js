@@ -161,8 +161,9 @@ function filterCity(prData) {
     // FIRST CITY NAME
     let accessPointDataArray = filterData(prData, 'accessPoints');
     let accessPointDataArrayClean = removeOuterArray(accessPointDataArray);
+    console.log('accesPoints Data Array', accessPointDataArray);
     let accessPointDataArrayFixed = fixEmptyValues(accessPointDataArrayClean);
-    // console.log('fixed data array', accessPointDataArrayFixed);
+    console.log('fixed data array', accessPointDataArrayFixed);
 
     let accesPointAdress = filterData(accessPointDataArrayFixed, 'accessPointAddress')
     // console.log('adresses', accesPointAdress);

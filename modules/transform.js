@@ -28,6 +28,8 @@ export function combineDoubleCities(rsData) {
 
     return result;
 
+    // WINNING RESOURCE: https://stackoverflow.com/questions/38294781/how-to-merge-duplicates-in-an-array-of-objects-and-sum-a-specific-property
+    // RESOURCE: https://stackoverflow.com/questions/60036060/combine-object-array-if-same-key-value-in-javascript
 }
 
 

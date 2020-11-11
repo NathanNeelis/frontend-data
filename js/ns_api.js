@@ -6,7 +6,7 @@ const endpointNS = 'https://gateway.apiportal.ns.nl/places-api/v2/places';
 getNsData(endpointNS)
     .then(nsData => {
         // console.log('all NS station data', nsData[0].locations);
-        // console.log('all NS data', nsData);
+        console.log('all NS data', nsData);
 
         // ------------- Train stations ------------- ------------- ------------- ------------- ------------- ------------- ------------- 
         let trainStation = nsData[0].locations;
