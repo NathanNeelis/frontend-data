@@ -19,35 +19,35 @@ Please read my [wiki](https://github.com/NathanNeelis/frontend-data/wiki/concept
 
 ### Concept
 A radar chart that shows the amount of P+R parking areas for the 9 Randstad cities. 
-Going in depth you would be able to see how many P+R parking spaces each city in total has available.  
-The second part of the concept is to split these results and filter on paid, free or both (total).  
+Going in-depth you would be able to see how many P+R parking spaces each city in total has available.  
+The second part of the concept is to split these results and filter on paid, free, or both (total).  
 The third part of the concept would be to map the differences in rate for the paid P+R parking areas.
-To finish it would be nice to show how long it would take from a P+R to reach a destination, for example the train station.  
+To finish it would be nice to show how long it would take from a P+R to reach a destination, for example, the train station.  
 
 ![PR_RadarChart-digitaal](https://user-images.githubusercontent.com/55492381/98220139-2b578c00-1f4e-11eb-8a87-c259ca875acc.jpg)  
 
 
 ### Datasets
 [NPR open dataset: parking data v2](https://npropendata.rdw.nl/parkingdata/v2/)  
-This dataset is a pack of url's to specific datasets about each parking area.  
+This dataset is a pack of URL's to specific datasets about each parking area.  
 I filtered this dataset on all parking areas that had "P+R" in their name.  
-These where 405 results from which I fetched the data and saved it into a [Github Gist](https://gist.githubusercontent.com/NathanNeelis/b28e16c0433b12da6bc716b276901ae9/raw/402754fa45924af802d06c5672043153bb990d5b/NPR_park_and_ride).  
+These were 405 results from which I fetched the data and saved it into a [Github Gist](https://gist.githubusercontent.com/NathanNeelis/b28e16c0433b12da6bc716b276901ae9/raw/402754fa45924af802d06c5672043153bb990d5b/NPR_park_and_ride).  
 The interesting variables in these specific datasets are:  
 * Description - _Name of the parking area_    
-* Accespoint adres city - _city of the parking area_  
-* Operator name - _Also name of the city, incase the accespoint data is invalid_  
+* Accespoint address city - _city of the parking area_  
+* Operator name - _Also name of the city, in case the accespoint data is invalid_  
 * Specifications capacity - _Amount of parking spaces_  
 
 
 ### Three steps of learning to visualize in this project
-This project is devided into three parts.  
+This project is divided into three parts.  
   
 #### First part - learning to clean the data
-To start I got tasked to clean the data from the dataset I got from a survey. Since this dataset contains sensitive data from other students following this course we decided it should not be shared online. But this part was only a learning step to start cleaning data from real datasets. So please feel free to look at the functional programming used to clean this survey data, but keep in mind, the data itself is missing and therefor [this javascript file](https://github.com/NathanNeelis/frontend-data/blob/master/js/surveyData_script.js) cannot be used in the browser.
+To start I got tasked to clean the data from the dataset I got from a survey. Since this dataset contains sensitive data from other students following this course we decided it should not be shared online. But this part was only a learning step to start cleaning data from real datasets. So please feel free to look at the functional programming used to clean this survey data, but keep in mind, the data itself is missing and therefore [this javascript file](https://github.com/NathanNeelis/frontend-data/blob/master/js/surveyData_script.js) cannot be used in the browser.
   
 #### Second part - cleaning and transforming  
-At the begin I had to explore the [RDW parking data](https://opendata.rdw.nl/browse?category=Parkeren) for interesting insights I might want to explore for my assignment from the Volkskrant. Here I found my concept as written above. For this concept I explored multiple datasets from the RDW, but also from the NS and at the end the NPR opendata set, which contained all the information I needed to start.
-After [fetching all P+R parking areas](https://github.com/NathanNeelis/frontend-data/blob/master/fetch_NPR.js) I cleaned the data and finnally transformed it so I could start creating my visual.
+In the begin, I had to explore the [RDW parking data](https://opendata.rdw.nl/browse?category=Parkeren) for interesting insights I might want to explore for my assignment from the Volkskrant. Here I found my concept as written above. For this concept, I explored multiple datasets from the RDW, but also from the NS and at the end the NPR open data set, which contained all the information I needed to start.
+After [fetching all P+R parking areas](https://github.com/NathanNeelis/frontend-data/blob/master/fetch_NPR.js) I cleaned the data and finally transformed it so I could start creating my visual.
 
 #### Third part - visualizing and getting ready to present
 With my transformed data I could start making my visual with the [D3 Library](https://github.com/d3/d3).  
@@ -78,7 +78,7 @@ With my transformed data I could start making my visual with the [D3 Library](ht
     ```  
 
 #### Download as zip
-1. Go to the url below and it will download the zip automatically  
+1. Go to the URL below and it will download the zip automatically  
     ```https://github.com/NathanNeelis/frontend-data/archive/master.zip```
      
 
@@ -87,7 +87,7 @@ With my transformed data I could start making my visual with the [D3 Library](ht
 
 ### Resources
 **Survey Data**  
-From all students following the datavisualisation track.   
+From all students following the data visualization track.   
 
 **Data sets**   
 [RDW open data](https://opendata.rdw.nl)  
