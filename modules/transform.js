@@ -1,144 +1,129 @@
-export function cleaningData(data){
-      let prCapacity = getCapacity(data);
-      let prCityArray = filterCity(data);
-      let prDescription = filterData(data, 'description');
-      let objectArray = wrap(prCityArray, prCapacity, prDescription);
-      let randstadCities = selectRandstad(objectArray);
-      let randstadClean = cleanRandStadData(randstadCities);
-  		let cleanData = listUnique(randstadClean)
-  return cleanData
+export function cleaningData(data) {
+    let prCapacity = getCapacity(data); // Array with all capacity data
+    let prCityArray = filterCity(data); // array with all city names
+    let prDescription = filterData(data, 'description'); // array with descriptions
+    let objectArray = wrap(prCityArray, prCapacity, prDescription); // combine capacity, cityname and description into one object
+    let randstadCities = selectRandstad(objectArray); // array with all randstad city data
+    let randstadClean = cleanRandStadData(randstadCities); // array transformed for data vis
+    let cleanData = listUnique(randstadClean); // Array with unique data points
+    return cleanData
 }
 
+// returns an array of objects with all data for each randstad city combined and capacity added up.
 export function combineDoubleCities(rsData) {
     let arr = rsData,
         result = [];
 
     arr.forEach(function (a) {
-        if (!this[a.city]) {
-            this[a.city] = {
-                description: a.city,
-                city: a.city,
-                capacity: 0
+        if (!this[a.city]) { // if the city name is not in the array yet, continue
+            this[a.city] = { // create new object
+                description: a.city, // Quickfix for showing right cityname at datavis. should be description normally
+                city: a.city, // city name is city out of previous object
+                capacity: 0 // sets capacity to starting point of 0
             };
-            result.push(this[a.city]);
+            result.push(this[a.city]); // push object to new array
         }
-        this[a.city].capacity += a.capacity;
+        this[a.city].capacity += a.capacity; // adds the capacity
     }, Object.create(null));
 
     return result;
-  
+
 }
 
 
 
 // returns array of objects with the right citynames
-export function cleanRandStadData(rsData) {
-    let delftClean = combineData(rsData, 'Delft');
-    let dordrechtClean = combineData(delftClean, 'Dordrecht');
-    let leidenClean = combineData(dordrechtClean, 'Leiden');
-    let zaandamClean = combineData(leidenClean, 'Zaandam');
-    let haarlemClean = combineData(zaandamClean, 'Haarlem');
-    let utrechtClean = combineData(haarlemClean, 'Utrecht');
-    let denHaagClean = combineData(utrechtClean, 'Den Haag');
-    let rotterdamClean = combineData(denHaagClean, 'Rotterdam');
-    let amsterdamClean = combineData(rotterdamClean, 'Amsterdam');
+function cleanRandStadData(rsData) {
+    let delftClean = combineData(rsData, 'Delft'); // Returns Array with objects that combines both citynames to 'Delft' if one of them is equal to 'Delft'
+    let dordrechtClean = combineData(delftClean, 'Dordrecht'); // Returns Array with objects that combines both citynames to this cityname and adds it to the previous array.
+    let leidenClean = combineData(dordrechtClean, 'Leiden'); // Returns Array with objects that combines both citynames to this cityname and adds it to the previous array.
+    let zaandamClean = combineData(leidenClean, 'Zaandam'); // Returns Array with objects that combines both citynames to this cityname and adds it to the previous array.
+    let haarlemClean = combineData(zaandamClean, 'Haarlem'); // Returns Array with objects that combines both citynames to this cityname and adds it to the previous array.
+    let utrechtClean = combineData(haarlemClean, 'Utrecht'); // Returns Array with objects that combines both citynames to this cityname and adds it to the previous array.
+    let denHaagClean = combineData(utrechtClean, 'Den Haag'); // Returns Array with objects that combines both citynames to this cityname and adds it to the previous array.
+    let rotterdamClean = combineData(denHaagClean, 'Rotterdam'); // Returns Array with objects that combines both citynames to this cityname and adds it to the previous array.
+    let amsterdamClean = combineData(rotterdamClean, 'Amsterdam'); // Returns Array with objects that combines both citynames to this cityname and adds it to the previous array.
 
-    let cleanData = [...amsterdamClean];
-
-    let fixedCleanData = fixDescription(cleanData);
+    let cleanData = [...amsterdamClean]; // creates a new array with all objects from above.
+    let fixedCleanData = fixDescription(cleanData); // if description is undefined it sets the description as P+R + city name.
 
     return fixedCleanData;
-    // console.log('fixed cities in randstad', amsterdamClean);
 }
 
 
 // returns an array with all data for ranstad cities
-export function selectRandstad(objectArray) {
-
-    let delftCities = filterRandstad(objectArray, 'Delft');
-    let dordrechtCities = filterRandstad(objectArray, 'Dordrecht');
-    let leidenCities = filterRandstad(objectArray, 'Leiden');
-    let zaandamCities = filterRandstad(objectArray, 'Zaandam');
-    let haarlemCities = filterRandstad(objectArray, 'Haarlem');
-    let utrechtCities = filterRandstad(objectArray, 'Utrecht');
-    let denHaagCities = filterRandstad(objectArray, 'Den Haag');
-    let rotterdamCities = filterRandstad(objectArray, 'Rotterdam');
-    let amsterdamCities = filterRandstad(objectArray, 'Amsterdam');
+function selectRandstad(objectArray) {
+    let delftCities = filterRandstad(objectArray, 'Delft'); // creates an array with all datapoints for the city 
+    let dordrechtCities = filterRandstad(objectArray, 'Dordrecht'); // creates an array with all datapoints for the city 
+    let leidenCities = filterRandstad(objectArray, 'Leiden'); // creates an array with all datapoints for the city 
+    let zaandamCities = filterRandstad(objectArray, 'Zaandam'); // creates an array with all datapoints for the city 
+    let haarlemCities = filterRandstad(objectArray, 'Haarlem'); // creates an array with all datapoints for the city 
+    let utrechtCities = filterRandstad(objectArray, 'Utrecht'); // creates an array with all datapoints for the city 
+    let denHaagCities = filterRandstad(objectArray, 'Den Haag'); // creates an array with all datapoints for the city 
+    let rotterdamCities = filterRandstad(objectArray, 'Rotterdam'); // creates an array with all datapoints for the city 
+    let amsterdamCities = filterRandstad(objectArray, 'Amsterdam'); // creates an array with all datapoints for the city 
 
     let randstadCities = [...delftCities, ...dordrechtCities, ...leidenCities, ...zaandamCities, ...haarlemCities, ...utrechtCities, ...denHaagCities, ...rotterdamCities, ...amsterdamCities]
-    // let randstadCities = [].concat(delftCities, dordrechtCities)
-    // console.log('clean randstad city data', randstadCities)
+    // creates a new array that include all arrays for randstad cities
 
     return randstadCities;
-
 }
 
 // returns an array of all the capicity for each parking area
-export function getCapacity(prData) {
-    let prSpecifications = filterData(prData, 'specifications')
-    // console.log('all specifications', prSpecifications);
+function getCapacity(prData) {
+    let prSpecifications = filterData(prData, 'specifications') // all specifications
+    let prSpecificationClean = removeOuterArray(prSpecifications); // all specificiations without the outer array
+    let prSPecificationFixed = fixEmptyValues(prSpecificationClean); // changes empty values to "0" 
+    // TODO: write code to clean empty values to 'UNKNOWN' and then make the adding up the capicity data work.
 
-    let prSpecificationClean = removeOuterArray(prSpecifications);
-    // console.log('specifications', prSpecificationClean)
-
-    let prSPecificationFixed = fixEmptyValues(prSpecificationClean);
-    // console.log('testing', prSPecificationFixed);
-    let prCapicity = filterData(prSPecificationFixed, 'capacity');
-    // console.log('capacity each garage', prCapicity);
-
+    let prCapicity = filterData(prSPecificationFixed, 'capacity'); //  Array of capacity for each parking area
     return prCapicity;
-
 }
 
 // Returns an array of all cities
-export function filterCity(prData) {
-    // FIRST CITY NAME
-    let accessPointDataArray = filterData(prData, 'accessPoints');
-    let accessPointDataArrayClean = removeOuterArray(accessPointDataArray);
-    let accessPointDataArrayFixed = fixEmptyValues(accessPointDataArrayClean);
-    // console.log('fixed data array', accessPointDataArrayFixed);
+function filterCity(prData) {
 
-    let accesPointAdress = filterData(accessPointDataArrayFixed, 'accessPointAddress')
-    // console.log('adresses', accesPointAdress);
+    // FIRST CITY NAME in accessPoint data
+    let accessPointDataArray = filterData(prData, 'accessPoints'); // Array with all accesPoint data 
+    let accessPointDataArrayClean = removeOuterArray(accessPointDataArray); // Array with all accesPoint data without outer array
+    let accessPointDataArrayFixed = fixEmptyValues(accessPointDataArrayClean); // Array with all missing values set to "0"
+    // TODO: write code to clean empty values to 'UNKNOWN' and then make the adding up the capicity data work.
 
-    let prCities = filterData(accesPointAdress, 'city')
-    // console.log(prCities);
+    let accesPointAdress = filterData(accessPointDataArrayFixed, 'accessPointAddress') // Array with all adress data
+    let prCities = filterData(accesPointAdress, 'city') // Array with all city names
 
-    // SECOND CITY NAME
-    let operatorDataArray = filterData(prData, 'operator');
-    // console.log('operator', operatorDataArray);
-    let operatorCityName = filterData(operatorDataArray, 'name')
-    // console.log('operator deep', operatorCityName);
+    // SECOND CITY NAME in operatorData 
+    let operatorDataArray = filterData(prData, 'operator'); // Array of all operator data
+    let operatorCityName = filterData(operatorDataArray, 'name') // Array of names in the operator data
 
     // BOTH NAMES IN 1 OBJECT
-    let cityNameObject = wrapCity(prCities, operatorCityName)
-    // console.log(cityNameObject);
+    let cityNameObject = wrapCity(prCities, operatorCityName) // Array with object with both city names
 
     return cityNameObject
 }
 
 
 // FILTER DATA ON RANDSTAD CITIES
-export function filterRandstad(prData, city) {
+function filterRandstad(prData, city) {
     let randstadData = prData.filter(array => {
-        return array.cityFirst === city || array.citySecond === city;
+        return array.cityFirst === city || array.citySecond === city; // return array if object city equals the giving city name
     })
     return randstadData;
 }
 
 
 // returns an array of all data in a specific column
-export function filterData(dataArray, column) {
+function filterData(dataArray, column) {
     return dataArray.map(result => result[column]);
 }
 
 
 // removes outer array
-export function removeOuterArray(prData) {
+function removeOuterArray(prData) {
     return prData.map(result => result[0]);
 }
 
-export function fixEmptyValues(prData) {
+function fixEmptyValues(prData) {
     // Create an object with all the keys in it
     // This will return one object containing all keys the items
     let obj = prData.reduce((res, item) => ({
@@ -173,18 +158,11 @@ export function fixEmptyValues(prData) {
 }
 
 
-// removes all items in array that do not have the key "name" in the object.
-export function removeNoName(allData) {
-    let newArray = allData.filter(obj => Object.keys(obj).includes("name"));
-    return newArray
-}
-// Resource: https://stackoverflow.com/questions/51367551/how-to-remove-object-from-array-if-property-in-object-do-not-exist
-
-
-export function wrap(city, capacity, description) {
+// returns new object with city name, capacity and description in it.
+function wrap(city, capacity, description) {
     let items = city.map((city, index) => {
         return {
-          	description: description[index],
+            description: description[index],
             cityFirst: city.cityFirst,
             citySecond: city.citySecond,
             capacity: capacity[index]
@@ -194,7 +172,8 @@ export function wrap(city, capacity, description) {
     return items
 }
 
-export function wrapCity(cityNameOne, cityNameTwo) {
+// returns new object with both city names
+function wrapCity(cityNameOne, cityNameTwo) {
     let cities = cityNameOne.map((city, index) => {
         return {
             cityFirst: city,
@@ -212,7 +191,7 @@ export function wrapCity(cityNameOne, cityNameTwo) {
 // instead of cityFirst and citySecond.
 // It also checks if there already is a key "city" that contains data
 
-export function combineData(rsData, city) {
+function combineData(rsData, city) {
     let cleanData = rsData.map((data) => {
         if (data.cityFirst === city || data.citySecond === city) {
             // console.log('i am looking for', city)
@@ -238,10 +217,10 @@ export function combineData(rsData, city) {
 
     // DIT KAN WAARSCHIJNLIJK NOG WEL MOOIER MET EEN ARRAY VAN RANDSTAD CITIES DIE HIER LOOPT. MISSCHIEN VOOR LATER.
 }
-  
+
 
 // If there is a undefined description it returns the description as 'P+R' + the city name
-export function fixDescription(rsData) {
+function fixDescription(rsData) {
     let cleanData = rsData.map((data) => {
         if (data.description === undefined) { // if description is undefined, change description to P+R + cityname
             return {
