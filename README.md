@@ -1,7 +1,7 @@
 ### functional-programming & Frontend Data
 functional-programming - Frontend Data 20/21  
 Student name: Nathan Neelis  
-:earth_americas: live website: https://nathanneelis.github.io/frontend-data/index.html
+:earth_americas: [live website](https://nathanneelis.github.io/frontend-data/index.html)
 
 ![eindresultaat2](https://user-images.githubusercontent.com/55492381/98851157-25820f00-2456-11eb-9c9c-a304a0bf43eb.gif)
 
