@@ -63,13 +63,19 @@ With my transformed data I could start making my visual with the [D3 Library](ht
     ```  
 
 2. Clone this repo  
-    ```git clone https://github.com/NathanNeelis/frontend-data.git```   
+    ```bash
+    git clone https://github.com/NathanNeelis/frontend-data.git
+    ```   
 
 3. install packages  
-    ```npm install```  
+    ```bash
+    npm install
+    ```  
 
 4. optional: fetch the data  
-    ```node fetch_NPR.js```  
+    ```bash
+    node fetch_NPR.js
+    ```  
 
 #### Download as zip
 1. Go to the url below and it will download the zip automatically  
