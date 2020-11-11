@@ -7,38 +7,51 @@ live website: https://nathanneelis.github.io/functional-programming/
 For the Volkskrant we are taking a look at the RDW datasets to find interesting insights for a potential article about the car in the city. The subject is "the car in the city" and the datasets contains all kind of information about parking. But we're free to explore other data as well that has to do with the car in the city.  
 
 ### Research questions
-**Main research question: At which train stations are you able to park your car?**   
-**Sub question 1:** Can you also recharge your parked car?   
-**Sub question 2:** Are you able to park your car if you are disabled?  
-**Sub question 3:** Where can you grab a OV-fiets after you parked your car?   
-**(Optional) Sub question 4:** Which P+R is the best parking spot for visiting Amsterdam Central station?  
+**Main research question: Which city uses the Park and Ride parking areas the best to keep cars from their city center?**   
+
+**Sub question 1:** Are all Randstad cities providing P+R parking areas?  
+**Sub question 2:** What about cities outside of the Randstad?
+**Sub question 3:** Is there a difference in rate for the Randstad cites and outside?  
+**Sub question 4:** How long does it take to reach your destination from the P+R?
   
-Please read my [wiki](https://github.com/NathanNeelis/functional-programming/wiki/concept) for more information about my assumptions and datasets.
+Please read my [wiki](https://github.com/NathanNeelis/frontend-data/wiki/concept) for more information about my assumptions and datasets.
 
 ### Concept
-I want to create a bar chart for the 9 Randstad cities. That shows the difference in paid and free P+R parking area's. And maybe, if the data is there a difference in rates. I would also like to pick out some cities outside the randstad and show the difference in paid and free P+R.
-  
-After that I would like so like to visualize a geographical map of all P+R parking places. I want to show a difference in paid and free. And I also want to highlight the best P+R spot to visit Amsterdam and maybe other cities.   
+A bar chart that shows the amount of P+R parking areas for the 9 Randstad cities. 
+Going in depth you would be able to see how many P+R parking spaces each city in total has available.  
+The second part of the concept is to split these results and filter on paid, free or both (total).  
+The third part of the concept would be to map the differences in rate for the paid P+R parking areas.
+To finish it would be nice to show how long it would take from a P+R to reach a destination, for example the train station.  
 
-<img width="786" alt="Schermafbeelding 2020-10-30 om 10 39 43" src="https://user-images.githubusercontent.com/55492381/97689670-3cab1f00-1a9c-11eb-959a-346a6e9398c9.png">
+![eindresultaat](https://user-images.githubusercontent.com/55492381/98845200-a7216f00-244d-11eb-9b9c-cc085fe00768.gif)
+
 
 ### Datasets
-[RDW dataset: GEO Parkeerkarages](https://opendata.rdw.nl/Parkeren/GEO-Parkeer-Garages/t5pc-eb34)  
-_Variables: Geolocations and areaid codes_  
-[RDW dataset: Geometrie gebied](https://opendata.rdw.nl/Parkeren/Open-Data-Parkeren-GEOMETRIE-GEBIED/nsk3-v9n7)  
-_Variables: areaid, GeoDataAsText_  
-[RDW dataset: Specificaties parkeergebieden](https://opendata.rdw.nl/Parkeren/Open-Data-Parkeren-SPECIFICATIES-PARKEERGEBIED/b3us-f26s)  
-_Variables:  Areaid's, total parking spots, electric charge parking spots, disabled parking spots._  
-[NS dataset: train station location](https://apiportal.ns.nl/)  
-[NS dataset: P+R free parking areas](https://apiportal.ns.nl/)  
-[NS dataset: P+R paid parking areas](https://apiportal.ns.nl/)  
-_Variables: Location (long/lat) for train stations and P+R parking areas, rate paid P+R_  
+[NPR open dataset: parking data v2](https://npropendata.rdw.nl/parkingdata/v2/)  
+This dataset is a pack of url's to specific datasets about each parking area.  
+I filtered this dataset on all parking areas that had "P+R" in their name.  
+These where 405 results from which I fetched the data and saved it into a [Github Gist](https://gist.githubusercontent.com/NathanNeelis/b28e16c0433b12da6bc716b276901ae9/raw/402754fa45924af802d06c5672043153bb990d5b/NPR_park_and_ride).  
+The interesting variables in these specific datasets are:  
+* Description - _Name of the parking area_    
+* Accespoint adres city - _city of the parking area_  
+* Operator name - _Also name of the city, incase the accespoint data is invalid_  
+* Specifications capacity - _Amount of parking spaces_  
+
+
+### Three steps of learning to visualize in this project
+This project is devided into three parts.  
+  
+#### First part - learning to clean the data
+To start I got tasked to clean the data from the dataset I got from a survey. Since this dataset contains sensitive data from other students following this course we decided it should not be shared online. But this part was only a learning step to start cleaning data from real datasets. So please feel free to look at the functional programming used to clean this survey data, but keep in mind, the data itself is missing and therefor [this javascript file](https://github.com/NathanNeelis/frontend-data/blob/master/js/surveyData_script.js) cannot be used in the browser.
+  
+#### Second part - cleaning and transforming  
+At the begin I had to explore the [RDW parking data](https://opendata.rdw.nl/browse?category=Parkeren) for interesting insights I might want to explore for my assignment from the Volkskrant. Here I found my concept as written above. For this concept I explored multiple datasets from the RDW, but also from the NS and at the end the NPR opendata set, which contained all the information I needed to start.
+After [fetching all P+R parking areas](https://github.com/NathanNeelis/frontend-data/blob/master/fetch_NPR.js) I cleaned the data and finnally transformed it so I could start creating my visual.
+
+#### Third part - visualizing and getting ready to present
+With my transformed data I could start making my visual with the [D3 Library](https://github.com/d3/d3).  
 
 ### Getting started
-_For a part of this project I used a dataset from a survey which is sensitive and cannot be shared online._
-_By downloading this project you will miss the key ingredient for the survey_Data_script.js_  
-  
-But this is only the start of this project, please feel free to skip that part for now and take a look at the way more interesting javascript files where I start cleaning data from API's and transform it for D3 visualisation.  
 
 #### Cloning the repo
 1. Create your git repo  
@@ -47,14 +60,18 @@ But this is only the start of this project, please feel free to skip that part f
     ```git init```  
 
 2. Clone this repo  
-    ```git clone https://github.com/NathanNeelis/functional-programming.git```   
+    ```git clone https://github.com/NathanNeelis/frontend-data.git```   
+
+3. install packages
+    ```npm install```  
 
 #### Download as zip
 1. Go to the url below and it will download the zip automatically  
-    ```http://github.com/NathanNeelis/functional-programming/archive/master.zip``` 
+    ```https://github.com/NathanNeelis/frontend-data/archive/master.zip```
+     
 
 ### License
-[MIT License](https://github.com/NathanNeelis/functional-programming/blob/master/LICENSE)   
+[MIT License](https://github.com/NathanNeelis/frontend-data/blob/master/LICENSE)   
 
 ### Resources
 **Survey Data**  
@@ -63,6 +80,7 @@ From all students following the datavisualisation track.
 **Data sets**   
 [RDW open data](https://opendata.rdw.nl)  
 [NS API](https://apiportal.ns.nl/)  
+[NPR open data](https://npropendata.rdw.nl/parkingdata/v2/)  
 
 **Code resources**  
 [String to numbers](https://stackoverflow.com/questions/15677869/how-to-convert-a-string-of-numbers-to-an-array-of-numbers) Stackoverflow    

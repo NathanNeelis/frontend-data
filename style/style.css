@@ -23,12 +23,12 @@ rect {
 
 .axis-y .tick text {
   font-size: 1.2em;
-  fill: white;
+  fill: #6f7173;
 }
 
 .axis-x .tick text {
   font-size: 1em;
-  fill: white;
+  fill: #6f7173;
 }
 
 .tick line {
@@ -49,7 +49,7 @@ rect {
 
 h1 {
   font-size: 2em;
-  color: white;
+  color: #446b00;
   font-family: sans-serif;
 }
 
