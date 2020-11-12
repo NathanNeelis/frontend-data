@@ -142,6 +142,8 @@ function changeOutput(data) {
 
   const dataSelection = select('input').property('checked') ? combineDoubleCities(data) : data
   console.log('new data', dataSelection)
+  // RESOURCE selecting checkbox: https://bl.ocks.org/johnnygizmo/3d593d3bf631e102a2dbee64f62d9de4
+
 
   //Update the domains
   yScale

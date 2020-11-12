@@ -120,6 +120,7 @@ From all students following the data visualization track.
 [Promise all](https://vizhub.com/Razpudding/781fc8abc97443919613184546720ab0?edit=files&file=index.js) Laurens  
 [FS writing json file](https://dlo.mijnhva.nl/d2l/ext/rp/192600/lti/framedlaunch/a44d697c-b552-4a8c-b5e7-12fe6b8d704a) Rijk  
 [FS writing json file](https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback) NodeJS.org  
+[selecting checkbox in D3](https://bl.ocks.org/johnnygizmo/3d593d3bf631e102a2dbee64f62d9de4) Johnny Matthews
 
 
 **API resources**  
