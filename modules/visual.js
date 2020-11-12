@@ -9,36 +9,38 @@ import {
   nice
 } from 'd3';
 
-// EXPORTING ALL VARIABLES DUE TO A ISSUE WITH MODULES 
+import {
+  combineDoubleCities
+} from './transform'
 
 // variables
-export const svg = select('svg');
+const svg = select('svg');
 
-export const height = +(svg.attr('height'));
-export const width = +(svg.attr('width'));
+const height = +(svg.attr('height'));
+const width = +(svg.attr('width'));
 
 // value accessers
 const title = 'Capicity P+R for each Randstad city'
 
-export const xValue = d => d.description
+const xValue = d => d.description
 const xAxisLabel = '';
 
-export const yValue = d => d.capacity
+const yValue = d => d.capacity
 const yAxisLabel = 'Capacity';
 
-export const margin = {
+const margin = {
   top: 10,
   right: 120,
   bottom: 230,
   left: 70
 }
-export const innerWidth = width - margin.left - margin.right;
-export const innerHeight = height - margin.top - margin.bottom;
+const innerWidth = width - margin.left - margin.right;
+const innerHeight = height - margin.top - margin.bottom;
 
-export const yScale = scaleLinear()
-export const xScale = scaleBand()
+const yScale = scaleLinear()
+const xScale = scaleBand()
 
-export const g = svg.append('g')
+const g = svg.append('g')
   .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
 
@@ -128,4 +130,85 @@ export function drawBars(data) {
   // 	.attr('y', -30)
   // 	.attr('class', 'title')
   // 	.text(title)
+}
+
+export function setupInput(data) {
+  // &CREDITS code example by Laurens
+  const input = select('input')
+    .on("click", () => changeOutput(data));
+}
+
+function changeOutput(data) {
+
+  const dataSelection = select('input').property('checked') ? combineDoubleCities(data) : data
+  console.log('new data', dataSelection)
+
+  //Update the domains
+  yScale
+    .domain([max(dataSelection, yValue), 0])
+    .nice()
+
+  xScale
+    .domain(dataSelection.map(xValue))
+
+
+  //Bars will store all bars created so far
+  //$CREDITS ==  Code example by LAURENS 
+  const bars = g.selectAll('.bar')
+    .data(dataSelection)
+
+
+  // update
+  bars
+    .attr('y', d => yScale(yValue(d)))
+    .attr('x', d => xScale(xValue(d)))
+    .attr('width', xScale.bandwidth())
+
+    .attr("y", function (d) {
+      return yScale(0);
+    })
+    .attr("height", 0)
+    .transition().duration(1000)
+    .attr('y', d => yScale(yValue(d)))
+    .attr('height', d => innerHeight - yScale(yValue(d)))
+  // console.log('data at update point', dataSelection)
+
+
+  //Enter
+  bars.enter()
+    .append('rect')
+    .attr('class', 'bar')
+    .attr('x', d => xScale(xValue(d)))
+    .attr('y', d => yScale(yValue(d)))
+    .attr('width', xScale.bandwidth())
+
+    .attr("y", function (d) {
+      return yScale(0);
+    })
+    .attr("height", 0)
+    .transition().duration(1000)
+    .attr('y', d => yScale(yValue(d)))
+    .attr("height", d => innerHeight - yScale(yValue(d)));
+
+  // RESOURCE BARS FROM BOTTOM TO TOP:
+  // RESOURCE: https://stackoverflow.com/questions/36126004/height-transitions-go-from-top-down-rather-than-from-bottom-up-in-d3
+
+  //Exit
+  bars.exit()
+    .remove()
+
+  //Update the ticks	
+  svg.select('.axis-x')
+    .call(axisBottom(xScale))
+    .attr('transform', `translate(0, ${innerHeight})`)
+    .selectAll("text")
+    .attr("transform", `rotate(50)`)
+    .attr('text-anchor', 'start')
+    .attr('x', 10)
+    .attr('y', 5)
+  svg.select('.axis-y')
+    .call(axisLeft(yScale).tickSize(-innerWidth))
+    .selectAll('.domain') // removing Y axis line and ticks
+    .remove()
+
 }
