@@ -5,6 +5,13 @@
   font-family: sans-serif;
 }
 
+
+/* 
+CUSTUM CHECKBOX
+CREDITS TO Godsont
+RESOURCE LINK: https://github.com/Godsont/Custom-Checkbox 
+*/
+
 body {
   margin: 0px;
   overflow: scroll;
@@ -48,21 +55,6 @@ rect {
   width: 960px;
   padding: 0 2em;
 }
-
-/* h1 {
-  font-size: 2em;
-  color: #446b00;
-  font-family: sans-serif;
-}
-
-p {
-  margin-top: .5em;
-} */
-
-
-
-/* CREDITS TO XXXX */
-
 
 
 h1 {
