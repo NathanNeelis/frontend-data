@@ -109,6 +109,12 @@ From all students following the data visualization track.
 [Learning NS API](https://github.com/aaraar/web-app-from-scratch-1920/blob/188a235e690a3e0963b1eac0907f89bcbd2827a8/src/Api.ts#L61-L81) Bas Aaraar 19/20   
 [D3 update](https://vizhub.com/Razpudding/c2a9c9b4fde84816931c404951c79873) Laurens Aarnoudse  
 [Checkbox Styling](https://github.com/Godsont/Custom-Checkbox) Godsont  
+[Merge duplicates in array of objects](https://stackoverflow.com/questions/38294781/how-to-merge-duplicates-in-an-array-of-objects-and-sum-a-specific-property) Nina Scholz  
+[Merge duplicates in array of objects](https://stackoverflow.com/questions/60036060/combine-object-array-if-same-key-value-in-javascript) Kobe  
+[Changing not existing values](https://stackoverflow.com/questions/47870887/how-to-fill-in-missing-keys-in-an-array-of-objects) user184994  
+[Creating objects from different arrays](https://stackoverflow.com/questions/40539591/how-to-create-an-array-of-objects-from-multiple-arrays) Zack Tanner  
+[Remove duplicates](https://stackoverflow.com/questions/2218999/remove-duplicates-from-an-array-of-objects-in-javascript) Eydrian  
+[Transitions from bottom to top](https://stackoverflow.com/questions/36126004/height-transitions-go-from-top-down-rather-than-from-bottom-up-in-d3) Harry Vane  
 
 **API resources**  
 [Learning NS API](https://apiportal.ns.nl/startersguide?_ga=2.32115260.384544656.1604054320-687691016.1603727685) NS startersguide  

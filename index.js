@@ -64,8 +64,6 @@ async function getData(url) {
 function setupInput() {
   // &CREDITS code example by Laurens
   const input = select('#filter')
-    // .on("click", changeOutput)
-    // .on("click", () => changeOutput(data));
     .on('click', changeOutput)
 }
 
@@ -104,7 +102,6 @@ function changeOutput() {
     .transition().duration(1000)
     .attr('y', d => yScale(yValue(d)))
     .attr('height', d => innerHeight - yScale(yValue(d)))
-  // console.log('data at update point', dataSelection)
 
 
   //Enter
