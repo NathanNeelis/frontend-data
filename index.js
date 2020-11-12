@@ -46,7 +46,7 @@ async function makeVisualization() {
       console.log('all P+R', data)
       console.log('P+R for each city', combine);
 
-      prDataSet = cleaningData(data)
+      prDataSet = cleaningData(data) // binding data to global data variable
 
       setupScales(prData) // import from visual
       setupAxis(prData) // import from visual

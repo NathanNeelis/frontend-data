@@ -25,12 +25,12 @@ getNsData(endpointNS)
         let trainStationNL = filterCountryNL(trainStation); // all stations based in NL
 
         // console logs
-        // console.log('all train station data', trainStation);
-        // console.log('all train station names', trainStationName);
-        // console.log('all train station code', trainStationCode);
-        // console.log('train station location clean', trainStationLocation);
-        // console.log('all train station country:', trainStationCountry);
-        // console.log('train station in NL:', trainStationNL);
+        console.log('all train station data', trainStation);
+        console.log('all train station names', trainStationName);
+        console.log('all train station code', trainStationCode);
+        console.log('train station location clean', trainStationLocation);
+        console.log('all train station country:', trainStationCountry);
+        console.log('train station in NL:', trainStationNL);
 
 
         // ------------- PR PAID PARKING AREAS ------------- ------------- ------------- ------------- ------------- ------------- ------------- 
@@ -60,16 +60,16 @@ getNsData(endpointNS)
 
 
         // console logs
-        // console.log('all PR location data', prPaid);
-        // console.log('PR Paid parking area names', prPaidName);
-        // console.log('PR locations clean:', prPaidLocation);
-        // console.log('PR Paid stationCode', prPaidStationCode);
-        // console.log('PR Paid rates', prPaidRates);
-        // console.log('PR Paid city names', prPaidCityClean);
-        // console.log('PR Paid regular day rate', prPaidRegularDayRate);
-        // console.log('PR Paid regular hour rate', prPaidRegularHourRate);
-        // console.log('PR Paid train passenger rate', prPaidTrainPassengerRate);
-        // console.log('PR Paid total parking spots', prPaidTotalParkingSpots);
+        console.log('all PR location data', prPaid);
+        console.log('PR Paid parking area names', prPaidName);
+        console.log('PR locations clean:', prPaidLocation);
+        console.log('PR Paid stationCode', prPaidStationCode);
+        console.log('PR Paid rates', prPaidRates);
+        console.log('PR Paid city names', prPaidCityClean);
+        console.log('PR Paid regular day rate', prPaidRegularDayRate);
+        console.log('PR Paid regular hour rate', prPaidRegularHourRate);
+        console.log('PR Paid train passenger rate', prPaidTrainPassengerRate);
+        console.log('PR Paid total parking spots', prPaidTotalParkingSpots);
 
         // ------------- PR FREE PARKING AREAS ------------- ------------- ------------- ------------- ------------- ------------- ------------- 
         let prFree = nsData[13].locations; // all PR paid location data
@@ -94,12 +94,12 @@ getNsData(endpointNS)
 
 
         // console logs
-        // console.log('all PR Free location data', prFree);
-        // console.log('PR Free parking area names', prFreeName);
-        // console.log('PR Free locations clean:', prFreeLocation);
-        // console.log('PR Free stationCode', prFreeStationCode);
-        // console.log('PR Free total parking spots', prFreeTotalParkingSpots);
-        // console.log('all PR with city names', prFreeCityClean);
+        console.log('all PR Free location data', prFree);
+        console.log('PR Free parking area names', prFreeName);
+        console.log('PR Free locations clean:', prFreeLocation);
+        console.log('PR Free stationCode', prFreeStationCode);
+        console.log('PR Free total parking spots', prFreeTotalParkingSpots);
+        console.log('all PR with city names', prFreeCityClean);
 
 
     })
