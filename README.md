@@ -3,7 +3,7 @@ functional-programming - Frontend Data 20/21
 Student name: Nathan Neelis  
 :earth_americas: [live website](https://nathanneelis.github.io/frontend-data/index.html)
 
-![eindresultaat2](https://user-images.githubusercontent.com/55492381/98851157-25820f00-2456-11eb-9c9c-a304a0bf43eb.gif)
+![eindresultaat3](https://user-images.githubusercontent.com/55492381/98954775-70576180-24fe-11eb-842d-d29f06e66d6a.gif)
 
 ### Assignment
 For the Volkskrant we are taking a look at the RDW datasets to find interesting insights for a potential article about the car in the city. The subject is "the car in the city" and the datasets contains all kind of information about parking. But we're free to explore other data as well that has to do with the car in the city.  
@@ -107,7 +107,8 @@ From all students following the data visualization track.
 [Using charAt](https://github.com/marcoFijan/functional-programming/blob/12ac7c24a5239bbb07b15b4d18ad67857d87895d/EnqueteData/index.js#L64-L69) Student Marco Fijan  
 [Using fetch headers](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) developer mozilla  
 [Learning NS API](https://github.com/aaraar/web-app-from-scratch-1920/blob/188a235e690a3e0963b1eac0907f89bcbd2827a8/src/Api.ts#L61-L81) Bas Aaraar 19/20   
-[D3 update](https://vizhub.com/Razpudding/c2a9c9b4fde84816931c404951c79873) Laurens Aarnoudse
+[D3 update](https://vizhub.com/Razpudding/c2a9c9b4fde84816931c404951c79873) Laurens Aarnoudse  
+[Checkbox Styling](https://github.com/Godsont/Custom-Checkbox) Godsont  
 
 **API resources**  
 [Learning NS API](https://apiportal.ns.nl/startersguide?_ga=2.32115260.384544656.1604054320-687691016.1603727685) NS startersguide  
