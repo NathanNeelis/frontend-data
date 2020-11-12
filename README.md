@@ -81,6 +81,11 @@ With my transformed data I could start making my visual with the [D3 Library](ht
 1. Go to the URL below and it will download the zip automatically  
     ```https://github.com/NathanNeelis/frontend-data/archive/master.zip```
      
+### Examples for creating my bar chart
+* [Currans tutorial](https://vizhub.com/curran/a44b38541b6e47a4afdd2dfe67a302c5)  
+* [Laurens live coding example](https://vizhub.com/Razpudding/c2a9c9b4fde84816931c404951c79873)  
+<img width="500" alt="BC_example_barchart_Curran" src="https://user-images.githubusercontent.com/55492381/98918264-b0522080-24cd-11eb-823c-ae7407e691bd.png"> <img width="500" alt="Schermafbeelding 2020-11-12 om 13 33 30" src="https://user-images.githubusercontent.com/55492381/98940695-a93a0b00-24eb-11eb-9f87-f7439f6b6b61.png">
+
 
 ### License
 [MIT License](https://github.com/NathanNeelis/frontend-data/blob/master/LICENSE)   
