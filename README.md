@@ -115,6 +115,12 @@ From all students following the data visualization track.
 [Creating objects from different arrays](https://stackoverflow.com/questions/40539591/how-to-create-an-array-of-objects-from-multiple-arrays) Zack Tanner  
 [Remove duplicates](https://stackoverflow.com/questions/2218999/remove-duplicates-from-an-array-of-objects-in-javascript) Eydrian  
 [Transitions from bottom to top](https://stackoverflow.com/questions/36126004/height-transitions-go-from-top-down-rather-than-from-bottom-up-in-d3) Harry Vane  
+[CORS PLUGIN](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf) Victor Boucher  
+[Remove object from array](https://stackoverflow.com/questions/51367551/how-to-remove-object-from-array-if-property-in-object-do-not-exist) mickl  
+[Promise all](https://vizhub.com/Razpudding/781fc8abc97443919613184546720ab0?edit=files&file=index.js) Laurens  
+[FS writing json file](https://dlo.mijnhva.nl/d2l/ext/rp/192600/lti/framedlaunch/a44d697c-b552-4a8c-b5e7-12fe6b8d704a) Rijk  
+[FS writing json file](https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback) NodeJS.org  
+
 
 **API resources**  
 [Learning NS API](https://apiportal.ns.nl/startersguide?_ga=2.32115260.384544656.1604054320-687691016.1603727685) NS startersguide  
