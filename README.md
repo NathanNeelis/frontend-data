@@ -80,17 +80,16 @@ With my transformed data I could start making my visual with the [D3 Library](ht
 #### Download as zip
 1. Go to the URL below and it will download the zip automatically  
     ```https://github.com/NathanNeelis/frontend-data/archive/master.zip```
-     
-### Examples for creating my bar chart
-* [Currans tutorial](https://vizhub.com/curran/a44b38541b6e47a4afdd2dfe67a302c5)  
-* [Laurens live coding example](https://vizhub.com/Razpudding/c2a9c9b4fde84816931c404951c79873)  
-<img width="500" alt="BC_example_barchart_Curran" src="https://user-images.githubusercontent.com/55492381/98918264-b0522080-24cd-11eb-823c-ae7407e691bd.png"> <img width="500" alt="Schermafbeelding 2020-11-12 om 13 33 30" src="https://user-images.githubusercontent.com/55492381/98940695-a93a0b00-24eb-11eb-9f87-f7439f6b6b61.png">
-
 
 ### License
 [MIT License](https://github.com/NathanNeelis/frontend-data/blob/master/LICENSE)   
 
 ### Resources
+**Examples for creating my bar chart**  
+* [Currans tutorial](https://vizhub.com/curran/a44b38541b6e47a4afdd2dfe67a302c5)  
+* [Laurens live coding example](https://vizhub.com/Razpudding/c2a9c9b4fde84816931c404951c79873)  
+<img width="500" alt="BC_example_barchart_Curran" src="https://user-images.githubusercontent.com/55492381/98918264-b0522080-24cd-11eb-823c-ae7407e691bd.png"> <img width="500" alt="Schermafbeelding 2020-11-12 om 13 33 30" src="https://user-images.githubusercontent.com/55492381/98940695-a93a0b00-24eb-11eb-9f87-f7439f6b6b61.png">
+  
 **Survey Data**  
 From all students following the data visualization track.   
 
@@ -108,8 +107,10 @@ From all students following the data visualization track.
 [Using charAt](https://github.com/marcoFijan/functional-programming/blob/12ac7c24a5239bbb07b15b4d18ad67857d87895d/EnqueteData/index.js#L64-L69) Student Marco Fijan  
 [Using fetch headers](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) developer mozilla  
 [Learning NS API](https://github.com/aaraar/web-app-from-scratch-1920/blob/188a235e690a3e0963b1eac0907f89bcbd2827a8/src/Api.ts#L61-L81) Bas Aaraar 19/20   
+[D3 update](https://vizhub.com/Razpudding/c2a9c9b4fde84816931c404951c79873) Laurens Aarnoudse
 
 **API resources**  
 [Learning NS API](https://apiportal.ns.nl/startersguide?_ga=2.32115260.384544656.1604054320-687691016.1603727685) NS startersguide  
 [TomTom API doc](https://developer.tomtom.com/on-street-parking) TomTom  
 [RDW API doc](https://www.rdw.nl/over-rdw/dienstverlening/open-data/handleidingen) RDW  
+[NPR open data](https://npropendata.rdw.nl/parkingdata/v2/) NPR  
