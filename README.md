@@ -98,6 +98,9 @@ From all students following the data visualization track.
 [NS API](https://apiportal.ns.nl/)  
 [NPR open data](https://npropendata.rdw.nl/parkingdata/v2/)  
 
+**Datavisulazation**
+[Book: Data Visualisation](https://www.bookdepository.com/Data-Visualisation-Andy-Kirk/9781526468925) Andy Kirk  
+  
 **Code resources**  
 [String to numbers](https://stackoverflow.com/questions/15677869/how-to-convert-a-string-of-numbers-to-an-array-of-numbers) Stackoverflow    
 [Using replace method 1](https://stackoverflow.com/questions/953311/replace-string-in-javascript-array) Stackoverflow  
