@@ -117,10 +117,10 @@ export function drawBars(data) {
     .attr('y', d => yScale(yValue(d)))
     .attr('width', xScale.bandwidth())
 
-    .attr("y", function (d) {
+    .attr('y', function (d) {
       return yScale(0);
     })
-    .attr("height", 0)
+    .attr('height', 0)
     .transition().duration(1000)
     .attr('y', d => yScale(yValue(d)))
     .attr('height', d => innerHeight - yScale(yValue(d)));
@@ -135,7 +135,7 @@ export function drawBars(data) {
 export function setupInput(data) {
   // &CREDITS code example by Laurens
   const input = select('input')
-    .on("click", () => changeOutput(data));
+    .on('click', () => changeOutput(data));
 }
 
 function changeOutput(data) {
@@ -166,10 +166,10 @@ function changeOutput(data) {
     .attr('x', d => xScale(xValue(d)))
     .attr('width', xScale.bandwidth())
 
-    .attr("y", function (d) {
+    .attr('y', function (d) {
       return yScale(0);
     })
-    .attr("height", 0)
+    .attr('height', 0)
     .transition().duration(1000)
     .attr('y', d => yScale(yValue(d)))
     .attr('height', d => innerHeight - yScale(yValue(d)))
@@ -184,13 +184,13 @@ function changeOutput(data) {
     .attr('y', d => yScale(yValue(d)))
     .attr('width', xScale.bandwidth())
 
-    .attr("y", function (d) {
+    .attr('y', function (d) {
       return yScale(0);
     })
-    .attr("height", 0)
+    .attr('height', 0)
     .transition().duration(1000)
     .attr('y', d => yScale(yValue(d)))
-    .attr("height", d => innerHeight - yScale(yValue(d)));
+    .attr('height', d => innerHeight - yScale(yValue(d)));
 
   // RESOURCE BARS FROM BOTTOM TO TOP:
   // RESOURCE: https://stackoverflow.com/questions/36126004/height-transitions-go-from-top-down-rather-than-from-bottom-up-in-d3
@@ -203,8 +203,8 @@ function changeOutput(data) {
   svg.select('.axis-x')
     .call(axisBottom(xScale))
     .attr('transform', `translate(0, ${innerHeight})`)
-    .selectAll("text")
-    .attr("transform", `rotate(50)`)
+    .selectAll('text')
+    .attr('transform', `rotate(50)`)
     .attr('text-anchor', 'start')
     .attr('x', 10)
     .attr('y', 5)
